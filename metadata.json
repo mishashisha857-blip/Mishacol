@@ -1,0 +1,7 @@
+{
+  "name": "NutriFit AI",
+  "description": "AI-powered food calorie & macro scanner, diet analyzer, personalized weight loss coach, step tracker and walking GPS map.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
