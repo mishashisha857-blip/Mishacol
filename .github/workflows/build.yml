@@ -31,11 +31,17 @@ jobs:
             cp .env.example .env
           fi
 
-          # Устанавливаем требуемую версию Gradle 9.3.1
+          # Настройки стабильности для KSP и Gradle
+          echo "ksp.incremental=false" >> gradle.properties
+          echo "ksp.incremental.intermodule=false" >> gradle.properties
+          echo "org.gradle.parallel=false" >> gradle.properties
+          echo "org.gradle.vfs.watch=false" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx4096m -Dfile.encoding=UTF-8" >> gradle.properties
+
           gradle wrapper --gradle-version 9.3.1 --distribution-type bin
 
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon --no-parallel --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
