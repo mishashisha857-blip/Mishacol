@@ -27,11 +27,15 @@ jobs:
             cd Mishacol-main
           fi
 
-          # Устанавливаем совместимую версию Gradle 8.7
-          gradle wrapper --gradle-version 8.7 --distribution-type bin
+          if [ -f ".env.example" ] && [ ! -f ".env" ]; then
+            cp .env.example .env
+          fi
+
+          # Устанавливаем требуемую версию Gradle 9.3.1
+          gradle wrapper --gradle-version 9.3.1 --distribution-type bin
 
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
